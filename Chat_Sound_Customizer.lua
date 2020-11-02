@@ -29,7 +29,7 @@ ChatSoundCustomizer.eventsSoundTable = {
 
 function ChatSoundCustomizer:OnInitialize()
 	local defaults = { profile = { sounds = self.eventsSoundTable, channel = "Master" } }
-	self.db = LibStub("AceDB-3.0"):New("ChatSoundDB", defaults, "Default")
+	self.db = LibStub("AceDB-3.0"):New("ChatSoundCustomizerDB", defaults, "Default")
 	self.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	self.options.args.profile.order = -1
 
