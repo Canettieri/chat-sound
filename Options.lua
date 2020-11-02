@@ -2,6 +2,8 @@ local ADDON_NAME, L = ...
 
 local AceDialog = LibStub("AceConfigDialog-3.0")
 
+local multiSelectedValues = {}
+
 AddonChatSound.options = {
 	type = "group",
 	name = ADDON_NAME,
@@ -15,7 +17,7 @@ AddonChatSound.options = {
 				AceDialog:Open(ADDON_NAME)
 			end
 		},
-		events = {
+		chat = {
 			type = "group",
 			name = L["Chat"],
 			args = {
@@ -31,6 +33,55 @@ AddonChatSound.options = {
 					},
 					get = function(info) return AddonChatSound.db.profile.channel end,
 					set = function(info, val) AddonChatSound.db.profile.channel = val end
+				},
+				multi = {
+					type = "group",
+					inline = true,
+					name = L["Multi Selection"],
+					args = {
+						select = {
+							type = "multiselect",
+							name = L["Channels"],
+							order = 1,
+							values = function()
+								local values = {}
+								for k, _ in pairs(AddonChatSound.eventsSoundTable) do
+									values[k] = L[k]
+								end
+								return values
+							end,
+							get = function(info, key) return multiSelectedValues[key] end,
+							set = function(info, key, value) multiSelectedValues[key] = value end
+						},
+						sound = {
+							type = "select",
+							name = L["Select a sound"],
+							order = 2,
+							width = "full",
+							dialogControl = "LSM30_Sound",
+							values = AceGUIWidgetLSMlists.sound,
+							set = function(info, val)
+								for k, enabled in pairs(multiSelectedValues) do
+									if enabled then
+										AddonChatSound.db.profile.sounds[k] = val
+									end
+								end
+							end,
+							get = function(info)
+								local selectedSound
+								for k, enabled in pairs(multiSelectedValues) do
+									if enabled then
+										selectedSound = selectedSound or AddonChatSound.db.profile.sounds[k]
+										if AddonChatSound.db.profile.sounds[k] ~= selectedSound then
+											return
+										end
+									end
+								end
+								return selectedSound
+							end,
+							order = 3,
+						}
+					}
 				}
 			}
 		}
@@ -38,7 +89,7 @@ AddonChatSound.options = {
 }
 
 for k, _ in pairs(AddonChatSound.eventsSoundTable) do
-	AddonChatSound.options.args.events.args[k] = {
+	AddonChatSound.options.args.chat.args[k] = {
 		type = "group",
 		name = L[k],
 		args = {
