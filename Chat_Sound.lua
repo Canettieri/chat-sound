@@ -1,5 +1,7 @@
 local ADDON_NAME, L = ...
 
+local fullName
+
 AddonChatSound = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
 
 AddonChatSound.eventsSoundTable = {
@@ -40,11 +42,15 @@ function AddonChatSound:OnInitialize()
 
 	local AceDialog = LibStub("AceConfigDialog-3.0")
 	self.optionsFrame = AceDialog:AddToBlizOptions(ADDON_NAME)
+
+	local myName, myRealm = UnitFullName("Player")
+	fullName = myName .. "-" .. myRealm
 end
 
-function AddonChatSound:PlaySound(event, ...)
+function AddonChatSound:PlaySound(event, _, playerName, ...)
+	if playerName == fullName then return end
 	local sound = self.db.profile.sounds[event]
-	if sound then
+	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], AddonChatSound.db.profile.channel or "Master")
 	end
 end
