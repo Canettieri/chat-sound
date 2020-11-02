@@ -4,4 +4,10 @@
 ## Notes-ptBR: Não perca mais as mensagens no chat por não ouvi-las.
 ## Author: Canettieri
 ## Version: 1.0
+## SavedVariables: ChatSoundDB
+
+libs\embeds.xml
+
 Chat_Sound.lua
+Options.lua
+SoundsRegistry.lua
