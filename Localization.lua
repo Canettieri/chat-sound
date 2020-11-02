@@ -14,7 +14,7 @@ L["CHAT_MSG_RAID_LEADER"] = "Raid Leader"
 L["CHAT_MSG_INSTANCE_CHAT"] = "Instance"
 L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Instance Leader"
 
---@localization(locale="enUS", format="lua_additive_table", same-key-is-true=true)@
+--@localization(locale="enUS", format="lua_additive_table")@
 if GetLocale() == "enUS" or GetLocale() == "enGB" then
 	return
 end
