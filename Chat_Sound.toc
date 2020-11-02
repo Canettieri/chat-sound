@@ -1,0 +1,7 @@
+## Interface: 90001
+## Title: Chat Sound Customizer |cff00aa00v1.0|r
+## Notes: Don't miss any more chat messages by not listening to them.
+## Notes-ptBR: Não perca mais as mensagens no chat por não ouvi-las.
+## Author: Canettieri
+## Version: 1.0
+Chat_Sound.lua
