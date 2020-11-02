@@ -1,0 +1,5 @@
+package-as: Chat_Sound_Customizer
+
+manual-changelog:
+    filename: CHANGELOG.txt
+    markup-type: markdown
