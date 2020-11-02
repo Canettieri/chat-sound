@@ -12,3 +12,4 @@ Localization.lua
 Chat_Sound.lua
 Options.lua
 SoundsRegistry.lua
+LDB.lua
