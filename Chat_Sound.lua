@@ -42,7 +42,9 @@ function AddonChatSound:OnInitialize()
 
 	local AceDialog = LibStub("AceConfigDialog-3.0")
 	self.optionsFrame = AceDialog:AddToBlizOptions(ADDON_NAME)
+end
 
+function AddonChatSound:OnEnable()
 	local myName, myRealm = UnitFullName("Player")
 	fullName = myName .. "-" .. myRealm
 end
