@@ -8,6 +8,7 @@
 
 libs\embeds.xml
 
+Localization.lua
 Chat_Sound.lua
 Options.lua
 SoundsRegistry.lua
