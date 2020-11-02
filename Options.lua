@@ -4,7 +4,7 @@ local AceDialog = LibStub("AceConfigDialog-3.0")
 
 local multiSelectedValues = {}
 
-AddonChatSound.options = {
+ChatSoundCustomizer.options = {
 	type = "group",
 	name = ADDON_NAME,
 	args = {
@@ -31,8 +31,8 @@ AddonChatSound.options = {
 						["Ambience"] = AMBIENCE_VOLUME,
 						["Dialog"] = DIALOG_VOLUME
 					},
-					get = function(info) return AddonChatSound.db.profile.channel end,
-					set = function(info, val) AddonChatSound.db.profile.channel = val end
+					get = function(info) return ChatSoundCustomizer.db.profile.channel end,
+					set = function(info, val) ChatSoundCustomizer.db.profile.channel = val end
 				},
 				multi = {
 					type = "group",
@@ -45,7 +45,7 @@ AddonChatSound.options = {
 							order = 1,
 							values = function()
 								local values = {}
-								for k, _ in pairs(AddonChatSound.eventsSoundTable) do
+								for k, _ in pairs(ChatSoundCustomizer.eventsSoundTable) do
 									values[k] = L[k]
 								end
 								return values
@@ -63,7 +63,7 @@ AddonChatSound.options = {
 							set = function(info, val)
 								for k, enabled in pairs(multiSelectedValues) do
 									if enabled then
-										AddonChatSound.db.profile.sounds[k] = val
+										ChatSoundCustomizer.db.profile.sounds[k] = val
 									end
 								end
 							end,
@@ -71,8 +71,8 @@ AddonChatSound.options = {
 								local selectedSound
 								for k, enabled in pairs(multiSelectedValues) do
 									if enabled then
-										selectedSound = selectedSound or AddonChatSound.db.profile.sounds[k]
-										if AddonChatSound.db.profile.sounds[k] ~= selectedSound then
+										selectedSound = selectedSound or ChatSoundCustomizer.db.profile.sounds[k]
+										if ChatSoundCustomizer.db.profile.sounds[k] ~= selectedSound then
 											return
 										end
 									end
@@ -88,8 +88,8 @@ AddonChatSound.options = {
 	}
 }
 
-for k, _ in pairs(AddonChatSound.eventsSoundTable) do
-	AddonChatSound.options.args.chat.args[k] = {
+for k, _ in pairs(ChatSoundCustomizer.eventsSoundTable) do
+	ChatSoundCustomizer.options.args.chat.args[k] = {
 		type = "group",
 		name = L[k],
 		args = {
@@ -99,8 +99,8 @@ for k, _ in pairs(AddonChatSound.eventsSoundTable) do
 				width = "full",
 				dialogControl = "LSM30_Sound",
 				values = AceGUIWidgetLSMlists.sound,
-				set = function(info, val) AddonChatSound.db.profile.sounds[k] = val end,
-				get = function(info) return AddonChatSound.db.profile.sounds[k] end,
+				set = function(info, val) ChatSoundCustomizer.db.profile.sounds[k] = val end,
+				get = function(info) return ChatSoundCustomizer.db.profile.sounds[k] end,
 				order = 3,
 			}
 		}

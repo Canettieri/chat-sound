@@ -2,9 +2,9 @@ local ADDON_NAME, L = ...
 
 local fullName
 
-AddonChatSound = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
+ChatSoundCustomizer = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
 
-AddonChatSound.eventsSoundTable = {
+ChatSoundCustomizer.eventsSoundTable = {
 	-- Guild
 	["CHAT_MSG_OFFICER"] = "CSC Sound 1",
 	["CHAT_MSG_GUILD"] = "CSC Sound 1",
@@ -27,13 +27,13 @@ AddonChatSound.eventsSoundTable = {
 	["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "CSC Sound 5",
 }
 
-function AddonChatSound:OnInitialize()
+function ChatSoundCustomizer:OnInitialize()
 	local defaults = { profile = { sounds = self.eventsSoundTable, channel = "Master" } }
 	self.db = LibStub("AceDB-3.0"):New("ChatSoundDB", defaults, "Default")
 	self.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	self.options.args.profile.order = -1
 
-	for event, _ in pairs(AddonChatSound.eventsSoundTable) do
+	for event, _ in pairs(ChatSoundCustomizer.eventsSoundTable) do
 		self:RegisterEvent(event, "PlaySound")
 	end
 
@@ -44,15 +44,15 @@ function AddonChatSound:OnInitialize()
 	self.optionsFrame = AceDialog:AddToBlizOptions(ADDON_NAME)
 end
 
-function AddonChatSound:OnEnable()
+function ChatSoundCustomizer:OnEnable()
 	local myName, myRealm = UnitFullName("Player")
 	fullName = myName .. "-" .. myRealm
 end
 
-function AddonChatSound:PlaySound(event, _, playerName, ...)
+function ChatSoundCustomizer:PlaySound(event, _, playerName, ...)
 	if playerName == fullName then return end
 	local sound = self.db.profile.sounds[event]
 	if sound and sound ~= "None" then
-		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], AddonChatSound.db.profile.channel or "Master")
+		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
 	end
 end
