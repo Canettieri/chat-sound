@@ -1,7 +1,7 @@
 local ADDON_NAME, L = ...
 
 local AceDialog = LibStub("AceConfigDialog-3.0")
-local module = ChatSoundCustomizer:NewModule("BrokerAnythingBroker", "AceEvent-3.0")
+local module = ChatSoundCustomizer:NewModule("LDBModule", "AceEvent-3.0")
 
 local LDB = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(ADDON_NAME, {
 	type = "launcher",
