@@ -49,8 +49,15 @@ function ChatSoundCustomizer:OnEnable()
 	fullName = myName .. "-" .. myRealm
 end
 
-function ChatSoundCustomizer:PlaySound(event, _, playerName, ...)
+function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 	if playerName == fullName then return end
+
+	for _, module in ChatSoundCustomizer:IterateModules() do
+		if module.ShouldIgnoreEvent and module:ShouldIgnoreEvent(event, text, playerName, ...) then
+			return
+		end
+	end
+
 	local sound = self.db.profile.sounds[event]
 	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")

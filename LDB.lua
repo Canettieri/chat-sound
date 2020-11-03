@@ -3,6 +3,12 @@ local ADDON_NAME, L = ...
 local AceDialog = LibStub("AceConfigDialog-3.0")
 local module = ChatSoundCustomizer:NewModule("LDBModule", "AceEvent-3.0")
 
+local icons = {
+	[false] = "237377",
+	[true] = "135975"
+}
+local isTemporarilyMuted = false
+
 local LDB = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(ADDON_NAME, {
 	type = "launcher",
 	icon = "237377",
@@ -16,16 +22,43 @@ function module:OnInitialize()
 	LDBIcon:Register(ADDON_NAME, LDB, self.db.profile.minimap)
 end
 
+function module:ShouldIgnoreEvent()
+	return isTemporarilyMuted or self.db.profile.mute
+end
+
+function module:SetMute(mute)
+	isTemporarilyMuted = mute
+	LDB.icon = icons[mute]
+end
+
 local ICON_MOUSE_LEFT = "|A:newplayertutorial-icon-mouse-leftbutton:0:0|a "
+local ICON_MOUSE_RIGHT = "|A:newplayertutorial-icon-mouse-rightbutton:0:0|a "
 function LDB.OnTooltipShow(ttp)
 	ttp:AddLine("|cFFFFFFFF" .. ADDON_NAME)
 	ttp:AddLine(" ")
 	ttp:AddLine(ICON_MOUSE_LEFT .. L("${button} to show the Config UI", { button = "|cFFFFF244" .. L["Left-click"] .. "|r" }))
+	if (isTemporarilyMuted) then
+		ttp:AddLine(ICON_MOUSE_RIGHT .. L("${button} to unmute CSC", { button = "|cFFFFF244" .. L["Right-click"] .. "|r" }))
+	else
+		ttp:AddLine(ICON_MOUSE_RIGHT .. L("${button} to temporarily mute CSC", { button = "|cFFFFF244" .. L["Right-click"] .. "|r" }))
+	end
 end
 
 function LDB.OnClick(self, button)
-	AceDialog:Open(ADDON_NAME)
+	if (button == "LeftButton") then
+		AceDialog:Open(ADDON_NAME)
+	elseif button == "RightButton" then
+		module:SetMute(not isTemporarilyMuted)
+	end
 end
+
+ChatSoundCustomizer.options.args.temporarilyMute = {
+	type = "toggle",
+	name = L["Temporarily Mute"],
+	desc = L["Temporarily mute the addon, it will go back to normal after reload"],
+	set = function(info, val) module:SetMute(val) end,
+	get = function(info) return isTemporarilyMuted end
+}
 
 ChatSoundCustomizer.options.args.showMinimap = {
 	type = "toggle",
