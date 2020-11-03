@@ -1,6 +1,11 @@
 local _, L = ...
 
-setmetatable(L, { __index = function(t, k) return k end })
+setmetatable(L, {
+	__index = function(t, k) return k end,
+	__call = function(self, locale, tab)
+		return (self[locale]:gsub('($%b{})', function(w) return tab[w:sub(3, -2)] or w end))
+	end
+})
 
 L["CHAT_MSG_OFFICER"] = "Guild Officer"
 L["CHAT_MSG_GUILD"] = "Guild"

@@ -16,6 +16,13 @@ function module:OnInitialize()
 	LDBIcon:Register(ADDON_NAME, LDB, self.db.profile.minimap)
 end
 
+local ICON_MOUSE_LEFT = "|A:newplayertutorial-icon-mouse-leftbutton:0:0|a "
+function LDB.OnTooltipShow(ttp)
+	ttp:AddLine("|cFFFFFFFF" .. ADDON_NAME)
+	ttp:AddLine(" ")
+	ttp:AddLine(ICON_MOUSE_LEFT .. L("${button} to show the Config UI", { button = "|cFFFFF244" .. L["Left-click"] .. "|r" }))
+end
+
 function LDB.OnClick(self, button)
 	AceDialog:Open(ADDON_NAME)
 end
