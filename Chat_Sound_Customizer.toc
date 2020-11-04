@@ -13,3 +13,5 @@ Chat_Sound_Customizer.lua
 Options.lua
 SoundsRegistry.lua
 LDB.lua
+
+modules\IgnoreList.lua
