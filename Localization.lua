@@ -2,6 +2,7 @@ local _, L = ...
 
 setmetatable(L, {
 	__index = function(t, k) return k end,
+	__newindex = function(t, k, v) rawset(t, k, v == true and k or v) end,
 	__call = function(self, locale, tab)
 		return (self[locale]:gsub('($%b{})', function(w) return tab[w:sub(3, -2)] or w end))
 	end
@@ -19,7 +20,25 @@ L["CHAT_MSG_RAID_LEADER"] = "Raid Leader"
 L["CHAT_MSG_INSTANCE_CHAT"] = "Instance"
 L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Instance Leader"
 
---@localization(locale="enUS", format="lua_additive_table")@
+L["Config UI"] = true
+L["Open config UI"] = true
+L["Chat"] = true
+L["Chats"] = true
+L["Channel"] = true
+L["Multi Selection"] = true
+L["Select a sound"] = true
+L["Ignore List"] = true
+L["Add to ignore list"] = true
+L["Remove from ignore list"] = true
+L["${button} to show the Config UI"] = true
+L["Left-click"] = true
+L["${button} to unmute CSC"] = true
+L["${button} to temporarily mute CSC"] = true
+L["Right-click"] = true
+L["Temporarily Mute"] = true
+L["Temporarily mute the addon, it will go back to normal after reload"] = true
+L["Show minimap button"] = true
+
 if GetLocale() == "enUS" or GetLocale() == "enGB" then
 	return
 end
@@ -39,8 +58,24 @@ if GetLocale() == "ptBR" then
 	L["CHAT_MSG_INSTANCE_CHAT"] = "Instância"
 	L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Líder da Instância"
 
+	L["Config UI"] = "Interface de Configuração"
+	L["Open config UI"] = "Abrir configuração"
+	L["Chat"] = "Chat"
+	L["Chats"] = "Chats"
 	L["Channel"] = "Canal"
+	L["Multi Selection"] = "Seleção Múltipla"
 	L["Select a sound"] = "Selecione um som"
+	L["Ignore List"] = "Lista de ignorados"
+	L["Add to ignore list"] = "Adicionar a lista de ignorados"
+	L["Remove from ignore list"] = "Remover da lista de ignorados"
+	L["${button} to show the Config UI"] = "${button} para mostrar a interface de configuração"
+	L["Left-click"] = "Clique-esquerdo"
+	L["${button} to unmute CSC"] = "${button} para desmutar o CSC"
+	L["${button} to temporarily mute CSC"] = "${button} para mutar o CSC temporariamente"
+	L["Right-click"] = "Clique-direito"
+	L["Temporarily Mute"] = "Mutar temporariamente"
+	L["Temporarily mute the addon, it will go back to normal after reload"] = "Muta temporariamente o addon, irá resetar ao recarregar o jogo"
+	L["Show minimap button"] = "Exibir botão do minimapa"
 	--@end-debug@
 
 	return
