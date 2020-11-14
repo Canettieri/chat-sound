@@ -2,7 +2,34 @@ local ADDON_NAME, L = ...
 
 local AceDialog = LibStub("AceConfigDialog-3.0")
 
+local module = ChatSoundCustomizer:NewModule("ConfigModule", "AceEvent-3.0")
+
 local multiSelectedValues = {}
+local chatColorMap = {}
+
+function module:UPDATE_CHAT_COLOR(event, chatName, r, g, b)
+	local color = chatColorMap[chatName]
+	if color then
+		color:SetRGB(r, g, b)
+	else
+		chatColorMap[chatName] = CreateColor(r, g, b)
+	end
+end
+
+module:RegisterEvent("UPDATE_CHAT_COLOR")
+
+function module:GetColorForEvent(event)
+	local chatName = event:gsub("CHAT_MSG_(%w)", "%1")
+	return chatName and chatColorMap[chatName]
+end
+
+function module:GetChatNameColored(event)
+	local chatColor = self:GetColorForEvent(event)
+	if (chatColor) then
+		return chatColor:WrapTextInColorCode(L[event])
+	end
+	return L[event]
+end
 
 ChatSoundCustomizer.options = {
 	type = "group",
@@ -46,7 +73,7 @@ ChatSoundCustomizer.options = {
 							values = function()
 								local values = {}
 								for k, _ in pairs(ChatSoundCustomizer.eventsSoundTable) do
-									values[k] = L[k]
+									values[k] = module:GetChatNameColored(k)
 								end
 								return values
 							end,
@@ -91,7 +118,7 @@ ChatSoundCustomizer.options = {
 for k, _ in pairs(ChatSoundCustomizer.eventsSoundTable) do
 	ChatSoundCustomizer.options.args.chat.args[k] = {
 		type = "group",
-		name = L[k],
+		name = function() return module:GetChatNameColored(k) end,
 		args = {
 			sound = {
 				type = "select",
