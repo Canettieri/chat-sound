@@ -65,7 +65,7 @@ ChatSoundCustomizer.options.args.showMinimap = {
 	name = L["Show minimap button"],
 	width = "double",
 	set = function(info, val)
-		self.db.profile.minimap.hide = not val
+		module.db.profile.minimap.hide = not val
 		if (val) then
 			LDBIcon:Show(ADDON_NAME)
 		else
