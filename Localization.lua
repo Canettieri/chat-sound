@@ -38,6 +38,9 @@ L["Right-click"] = true
 L["Temporarily Mute"] = true
 L["Temporarily mute the addon, it will go back to normal after reload"] = true
 L["Show minimap button"] = true
+L["Newcomer"] = true
+L["This sound will play when you are a GUIDE and a NEWCOMER says something in the Newcomer Chat"] = true
+L["This sound will play when you are a NEWCOMER and a GUIDE says something in the Newcomer Chat"] = true
 
 if GetLocale() == "enUS" or GetLocale() == "enGB" then
 	return
@@ -76,6 +79,12 @@ if GetLocale() == "ptBR" then
 	L["Temporarily Mute"] = "Mutar temporariamente"
 	L["Temporarily mute the addon, it will go back to normal after reload"] = "Muta temporariamente o addon, irá resetar ao recarregar o jogo"
 	L["Show minimap button"] = "Exibir botão do minimapa"
+	L["Newcomer"] = "Novato"
+	L["Guide"] = "Guia"
+	L["This sound will play when you are a GUIDE and a NEWCOMER says something in the Newcomer Chat"]
+	= "Este som irá tocar quando você é um Guia e um Novato diz algo no chat de novatos"
+	L["This sound will play when you are a NEWCOMER and a GUIDE says something in the Newcomer Chat"]
+	= "Este som irá tocar quando você é um Novato e um Guia diz algo no chat de novatos"
 	--@end-debug@
 
 	return

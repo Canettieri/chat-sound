@@ -3,6 +3,7 @@ local ADDON_NAME, L = ...
 local fullName
 
 ChatSoundCustomizer = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
+ChatSoundCustomizer.title = GetAddOnMetadata(ADDON_NAME, "Title")
 
 ChatSoundCustomizer.eventsSoundTable = {
 	-- Guild
@@ -49,14 +50,18 @@ function ChatSoundCustomizer:OnEnable()
 	fullName = myName .. "-" .. myRealm
 end
 
+function ChatSoundCustomizer:ShouldIgnoreEvent(event, text, playerName, ...)
+	for _, module in self:IterateModules() do
+		if module.ShouldIgnoreEvent and module:ShouldIgnoreEvent(event, text, playerName, ...) then
+			return true
+		end
+	end
+end
+
 function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 	if playerName == fullName then return end
 
-	for _, module in ChatSoundCustomizer:IterateModules() do
-		if module.ShouldIgnoreEvent and module:ShouldIgnoreEvent(event, text, playerName, ...) then
-			return
-		end
-	end
+	if self:ShouldIgnoreEvent(event, text, playerName, ...) then return end
 
 	local sound = self.db.profile.sounds[event]
 	if sound and sound ~= "None" then
