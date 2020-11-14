@@ -12,7 +12,7 @@ local isTemporarilyMuted = false
 local LDB = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(ADDON_NAME, {
 	type = "launcher",
 	icon = "237377",
-	label = ADDON_NAME,
+	label = ChatSoundCustomizer.title,
 })
 local LDBIcon = LibStub("LibDBIcon-1.0")
 
@@ -34,7 +34,7 @@ end
 local ICON_MOUSE_LEFT = "|A:newplayertutorial-icon-mouse-leftbutton:0:0|a "
 local ICON_MOUSE_RIGHT = "|A:newplayertutorial-icon-mouse-rightbutton:0:0|a "
 function LDB.OnTooltipShow(ttp)
-	ttp:AddLine("|cFFFFFFFF" .. ADDON_NAME)
+	ttp:AddLine("|cFFFFFFFF" .. ChatSoundCustomizer.title)
 	ttp:AddLine(" ")
 	ttp:AddLine(ICON_MOUSE_LEFT .. L("${button} to show the Config UI", { button = "|cFFFFF244" .. L["Left-click"] .. "|r" }))
 	if (isTemporarilyMuted) then

@@ -33,7 +33,7 @@ end
 
 ChatSoundCustomizer.options = {
 	type = "group",
-	name = ADDON_NAME,
+	name = ChatSoundCustomizer.title,
 	args = {
 		ui = {
 			type = "execute",
