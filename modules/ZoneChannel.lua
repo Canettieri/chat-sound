@@ -33,6 +33,7 @@ function module:PlaySound(event, ...)
 	local sound = self.db.profile[dbVar]
 	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		return true
 	end
 end
 

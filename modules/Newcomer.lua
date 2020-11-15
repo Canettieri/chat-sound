@@ -14,17 +14,16 @@ end
 local function play(sound)
 	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		return true
 	end
 end
 
 function module:PlaySound(event, ...)
 	local flag = select(6, ...)
 	if (flag == "NEWCOMER" and IsActivePlayerMentor()) then
-		play(self.db.profile.newcomerSound)
-		return true
+		return play(self.db.profile.newcomerSound)
 	elseif (flag == "GUIDE" and C_PlayerMentorship.IsActivePlayerConsideredNewcomer()) then
-		play(self.db.profile.guideSound)
-		return true
+		return play(self.db.profile.guideSound)
 	end
 end
 
