@@ -18,8 +18,6 @@ local function play(sound)
 end
 
 function module:PlaySound(event, ...)
-	if ChatSoundCustomizer:ShouldIgnoreEvent(...) then return end
-
 	local flag = select(6, ...)
 	if (flag == "NEWCOMER" and IsActivePlayerMentor()) then
 		play(self.db.profile.newcomerSound)
