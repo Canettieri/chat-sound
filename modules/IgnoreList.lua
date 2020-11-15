@@ -1,6 +1,7 @@
 local ADDON_NAME, L = ...
 
 local module = ChatSoundCustomizer:NewModule("IgnoreListModule", "AceEvent-3.0")
+module.priority = 10
 
 local Completing = LibStub("AceGUI-3.0-Eliote-AutoCompleteEditBox")
 Completing:Register("CSCOnlinePlayersAutoComplete", AUTOCOMPLETE_LIST_TEMPLATES.ONLINE)

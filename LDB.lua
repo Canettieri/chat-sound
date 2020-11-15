@@ -2,6 +2,7 @@ local ADDON_NAME, L = ...
 
 local AceDialog = LibStub("AceConfigDialog-3.0")
 local module = ChatSoundCustomizer:NewModule("LDBModule", "AceEvent-3.0")
+module.priority = -1
 
 local icons = {
 	[false] = "237377",

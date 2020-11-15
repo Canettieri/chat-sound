@@ -3,6 +3,7 @@ local ADDON_NAME, L = ...
 local AceDialog = LibStub("AceConfigDialog-3.0")
 
 local module = ChatSoundCustomizer:NewModule("ConfigModule", "AceEvent-3.0")
+module.priority = -1
 
 local multiSelectedValues = {}
 local chatColorMap = {}

@@ -50,8 +50,39 @@ function ChatSoundCustomizer:OnEnable()
 	fullName = myName .. "-" .. myRealm
 end
 
+local priorityCache
+function ChatSoundCustomizer:IterateModulesByPriority()
+	if not priorityCache then
+		priorityCache = {}
+		priorityCache.table = {}
+		priorityCache.index = {}
+		local last = 1000000
+		for _, module in self:IterateModules() do
+			local priority = module.priority
+			if (not priority) then error("The module " .. module:GetName() .. " needs a priority property!") end
+			if (priorityCache.table[priority]) then error("duplicated priority registered!") end
+			if (priority == -1) then
+				priority = last
+				last = last + 1
+			end
+			priorityCache.table[priority] = module
+			table.insert(priorityCache.index, priority)
+		end
+		table.sort(priorityCache.index)
+	end
+
+	local i = 0
+	return function()
+		i = i + 1
+		local priority = priorityCache.index[i]
+		if priority then
+			return priority, priorityCache.table[priority]
+		end
+	end
+end
+
 function ChatSoundCustomizer:ShouldIgnoreEvent(event, text, playerName, ...)
-	for _, module in self:IterateModules() do
+	for _, module in self:IterateModulesByPriority() do
 		if module.ShouldIgnoreEvent and module:ShouldIgnoreEvent(event, text, playerName, ...) then
 			return true
 		end
@@ -66,5 +97,12 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 	local sound = self.db.profile.sounds[event]
 	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		return
+	end
+
+	for _, module in self:IterateModulesByPriority() do
+		if module.PlaySound and module:PlaySound(event, text, playerName, ...) then
+			return
+		end
 	end
 end

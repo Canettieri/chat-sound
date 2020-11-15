@@ -3,11 +3,12 @@ local ADDON_NAME, L = ...
 local module = ChatSoundCustomizer:NewModule("NewcomerModule", "AceEvent-3.0")
 local config = ChatSoundCustomizer:GetModule("ConfigModule")
 
+module.priority = 100
+
 function module:OnInitialize()
 	local defaults = { profile = { newcomerSound = "None", guideSound = "None" } }
 	self.db = ChatSoundCustomizer.db:RegisterNamespace("Newcomer", defaults)
-
-	self:RegisterEvent("CHAT_MSG_CHANNEL", "PlaySound")
+	ChatSoundCustomizer:RegisterEvent("CHAT_MSG_CHANNEL", "PlaySound")
 end
 
 local function play(sound)
@@ -22,8 +23,10 @@ function module:PlaySound(event, ...)
 	local flag = select(6, ...)
 	if (flag == "NEWCOMER" and IsActivePlayerMentor()) then
 		play(self.db.profile.newcomerSound)
+		return true
 	elseif (flag == "GUIDE" and C_PlayerMentorship.IsActivePlayerConsideredNewcomer()) then
 		play(self.db.profile.guideSound)
+		return true
 	end
 end
 
