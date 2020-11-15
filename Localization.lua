@@ -39,6 +39,7 @@ L["Temporarily Mute"] = true
 L["Temporarily mute the addon, it will go back to normal after reload"] = true
 L["Show minimap button"] = true
 L["Newcomer"] = true
+L["Guide"] = true
 L["This sound will play when you are a GUIDE and a NEWCOMER says something in the Newcomer Chat"] = true
 L["This sound will play when you are a NEWCOMER and a GUIDE says something in the Newcomer Chat"] = true
 L["Zone Channels"] = true
@@ -95,6 +96,8 @@ if GetLocale() == "ptBR" then
 	L["General"] = "Geral"
 	L["Trade"] = "Comércio"
 	L["Local Defense"] = "Defesa Local"
+	L["Sound for receiving messages"] = "Som para mensagens recebidas"
+	L["Sound for sending messages"] = "Som para mensagens enviadas"
 	--@end-debug@
 
 	return
