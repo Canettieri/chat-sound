@@ -29,7 +29,7 @@ ChatSoundCustomizer.eventsSoundTable = {
 }
 
 function ChatSoundCustomizer:OnInitialize()
-	local defaults = { profile = { sounds = self.eventsSoundTable, channel = "Master" } }
+	local defaults = { profile = { sounds = self.eventsSoundTable, channel = "Master", soundsOut = {} } }
 	self.db = LibStub("AceDB-3.0"):New("ChatSoundCustomizerDB", defaults, "Default")
 	self.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	self.options.args.profile.order = -1
@@ -90,11 +90,15 @@ function ChatSoundCustomizer:ShouldIgnoreEvent(event, text, playerName, ...)
 end
 
 function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
-	if playerName == fullName then return end
-
 	if self:ShouldIgnoreEvent(event, text, playerName, ...) then return end
 
-	local sound = self.db.profile.sounds[event]
+	local sound
+	if self:IsOutput(text, playerName) then
+		sound = self.db.profile.soundsOut[event]
+	else
+		sound = self.db.profile.sounds[event]
+	end
+
 	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
 		return
@@ -105,4 +109,8 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 			return
 		end
 	end
+end
+
+function ChatSoundCustomizer:IsOutput(_, playerName)
+	return playerName == fullName
 end

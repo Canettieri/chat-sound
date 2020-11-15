@@ -15,10 +15,10 @@ local zoneIdDbMap = {
 function module:OnInitialize()
 	local defaults = {
 		profile = {
-			generalSound = "None",
-			tradeSound = "None",
-			localDefenseSound = "None",
-			newcomerSound = "None"
+			generalSound = { input = "None", output = "None" },
+			tradeSound = { input = "None", output = "None" },
+			localDefenseSound = { input = "None", output = "None" },
+			newcomerSound = { input = "None", output = "None" }
 		}
 	}
 	self.db = ChatSoundCustomizer.db:RegisterNamespace("ZoneChannel", defaults)
@@ -30,11 +30,42 @@ function module:PlaySound(event, ...)
 	local dbVar = zoneIdDbMap[zoneChannelID]
 	if not dbVar then return end
 
-	local sound = self.db.profile[dbVar]
+	local sound
+	if (ChatSoundCustomizer:IsOutput(...)) then
+		sound = self.db.profile[dbVar] and self.db.profile[dbVar].output
+	else
+		sound = self.db.profile[dbVar] and self.db.profile[dbVar].input
+	end
+
 	if sound and sound ~= "None" then
 		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
 		return true
 	end
+end
+
+local function createConfigArgs(db)
+	return {
+		soundReceive = {
+			type = "select",
+			name = L["Sound for receiving messages"],
+			width = "full",
+			order = 1,
+			dialogControl = "LSM30_Sound",
+			values = AceGUIWidgetLSMlists.sound,
+			set = function(info, val) module.db.profile[db].input = val end,
+			get = function(info) return module.db.profile[db].input end,
+		},
+		soundSend = {
+			type = "select",
+			name = L["Sound for sending messages"],
+			width = "full",
+			order = 1,
+			dialogControl = "LSM30_Sound",
+			values = AceGUIWidgetLSMlists.sound,
+			set = function(info, val) module.db.profile[db].output = val end,
+			get = function(info) return module.db.profile[db].output end,
+		},
+	}
 end
 
 ChatSoundCustomizer.options.args.chat.args.zonechannel = {
@@ -48,69 +79,25 @@ ChatSoundCustomizer.options.args.chat.args.zonechannel = {
 			type = "group",
 			name = L["General"],
 			inline = true,
-			args = {
-				sound = {
-					type = "select",
-					name = L["Select a sound"],
-					width = "full",
-					order = 1,
-					dialogControl = "LSM30_Sound",
-					values = AceGUIWidgetLSMlists.sound,
-					set = function(info, val) module.db.profile.generalSound = val end,
-					get = function(info) return module.db.profile.generalSound end,
-				},
-			}
+			args = createConfigArgs("generalSound")
 		},
 		trade = {
 			type = "group",
 			name = L["Trade"],
 			inline = true,
-			args = {
-				sound = {
-					type = "select",
-					name = L["Select a sound"],
-					width = "full",
-					order = 1,
-					dialogControl = "LSM30_Sound",
-					values = AceGUIWidgetLSMlists.sound,
-					set = function(info, val) module.db.profile.tradeSound = val end,
-					get = function(info) return module.db.profile.tradeSound end,
-				},
-			}
+			args = createConfigArgs("tradeSound")
 		},
 		localDefense = {
 			type = "group",
 			name = L["Local Defense"],
 			inline = true,
-			args = {
-				sound = {
-					type = "select",
-					name = L["Select a sound"],
-					width = "full",
-					order = 1,
-					dialogControl = "LSM30_Sound",
-					values = AceGUIWidgetLSMlists.sound,
-					set = function(info, val) module.db.profile.localDefenseSound = val end,
-					get = function(info) return module.db.profile.localDefenseSound end,
-				},
-			}
+			args = createConfigArgs("localDefenseSound")
 		},
 		newcomer = {
 			type = "group",
 			name = L["Newcomer"],
 			inline = true,
-			args = {
-				sound = {
-					type = "select",
-					name = L["Select a sound"],
-					width = "full",
-					order = 1,
-					dialogControl = "LSM30_Sound",
-					values = AceGUIWidgetLSMlists.sound,
-					set = function(info, val) module.db.profile.newcomerSound = val end,
-					get = function(info) return module.db.profile.newcomerSound end,
-				},
-			}
+			args = createConfigArgs("newcomerSound")
 		},
 	}
 }

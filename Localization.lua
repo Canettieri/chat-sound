@@ -45,6 +45,8 @@ L["Zone Channels"] = true
 L["General"] = true
 L["Trade"] = true
 L["Local Defense"] = true
+L["Sound for receiving messages"] = true
+L["Sound for sending messages"] = true
 
 if GetLocale() == "enUS" or GetLocale() == "enGB" then
 	return
