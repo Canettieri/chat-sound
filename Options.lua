@@ -107,12 +107,11 @@ ChatSoundCustomizer.options = {
 								end
 								return selectedSound
 							end,
-							order = 3,
 						},
 						soundSend = {
 							type = "select",
 							name = L["Sound for sending messages"],
-							order = 2,
+							order = 3,
 							width = "full",
 							dialogControl = "LSM30_Sound",
 							values = AceGUIWidgetLSMlists.sound,
@@ -136,7 +135,6 @@ ChatSoundCustomizer.options = {
 								end
 								return selectedSound
 							end,
-							order = 4,
 						}
 					}
 				}

@@ -59,7 +59,7 @@ local function createConfigArgs(db)
 			type = "select",
 			name = L["Sound for sending messages"],
 			width = "full",
-			order = 1,
+			order = 2,
 			dialogControl = "LSM30_Sound",
 			values = AceGUIWidgetLSMlists.sound,
 			set = function(info, val) module.db.profile[db].output = val end,
