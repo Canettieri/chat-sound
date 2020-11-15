@@ -16,7 +16,7 @@ local function play(sound)
 	end
 end
 
-function module:PlaySound(...)
+function module:PlaySound(event, ...)
 	if ChatSoundCustomizer:ShouldIgnoreEvent(...) then return end
 
 	local flag = select(6, ...)
