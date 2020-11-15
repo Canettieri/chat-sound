@@ -16,3 +16,4 @@ LDB.lua
 
 modules\IgnoreList.lua
 modules\Newcomer.lua
+modules\ZoneChannel.lua

@@ -41,6 +41,10 @@ L["Show minimap button"] = true
 L["Newcomer"] = true
 L["This sound will play when you are a GUIDE and a NEWCOMER says something in the Newcomer Chat"] = true
 L["This sound will play when you are a NEWCOMER and a GUIDE says something in the Newcomer Chat"] = true
+L["Zone Channels"] = true
+L["General"] = true
+L["Trade"] = true
+L["Local Defense"] = true
 
 if GetLocale() == "enUS" or GetLocale() == "enGB" then
 	return
@@ -85,6 +89,10 @@ if GetLocale() == "ptBR" then
 	= "Este som irá tocar quando você é um Guia e um Novato diz algo no chat de novatos"
 	L["This sound will play when you are a NEWCOMER and a GUIDE says something in the Newcomer Chat"]
 	= "Este som irá tocar quando você é um Novato e um Guia diz algo no chat de novatos"
+	L["Zone Channels"] = "Canais de Área"
+	L["General"] = "Geral"
+	L["Trade"] = "Comércio"
+	L["Local Defense"] = "Defesa Local"
 	--@end-debug@
 
 	return
