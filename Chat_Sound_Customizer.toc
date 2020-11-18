@@ -1,4 +1,4 @@
-## Interface: 90001
+## Interface: 90002
 ## Title: Chat Sound Customizer |cff00aa00v@project-version@|r
 ## Notes: Don't miss chat messages anymore by not listening to them.
 ## Notes-ptBR: Não perca mais as mensagens no chat por não ouvi-las.
