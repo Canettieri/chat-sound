@@ -7,3 +7,9 @@ for i = 1, 12 do
 			"Interface\\AddOns\\" .. ADDON_NAME .. "\\audios\\sound" .. i .. ".mp3"
 	)
 end
+
+LSM:Register(
+		LSM.MediaType.SOUND,
+		"Murloc Aggro",
+		556000
+)
