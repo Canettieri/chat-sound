@@ -114,3 +114,35 @@ end
 function ChatSoundCustomizer:IsOutput(_, playerName)
 	return playerName == fullName
 end
+
+local function GetDbFromPath(paths)
+	local db = paths[1]
+	local key = paths[2]
+	for i = 2, #paths - 1 do
+		db = db[key]
+		key = paths[i + 1]
+	end
+	return db, key
+end
+
+function ChatSoundCustomizer:CreateSoundAceOption(name, order, dbPath)
+	return {
+		type = "select",
+		name = name,
+		width = "full",
+		values = LibStub("LibSharedMedia-3.0"):List("sound"),
+		set = function(info, val)
+			local db, key = GetDbFromPath(dbPath)
+			db[key] = info.option.values[val]
+		end,
+		get = function(info)
+			local db, key = GetDbFromPath(dbPath)
+			local selected = db[key] or "None"
+			for i, v in ipairs(info.option.values) do
+				if selected == v then return i end
+			end
+		end,
+		order = order,
+		dialogControl = "Eliote-LSMSound"
+	}
+end

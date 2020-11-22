@@ -86,12 +86,12 @@ ChatSoundCustomizer.options = {
 							name = L["Sound for receiving messages"],
 							order = 2,
 							width = "full",
-							dialogControl = "LSM30_Sound",
-							values = AceGUIWidgetLSMlists.sound,
+							dialogControl = "Eliote-LSMSound",
+							values = LibStub("LibSharedMedia-3.0"):List("sound"),
 							set = function(info, val)
 								for k, enabled in pairs(multiSelectedValues) do
 									if enabled then
-										ChatSoundCustomizer.db.profile.sounds[k] = val
+										ChatSoundCustomizer.db.profile.sounds[k] = info.option.values[val]
 									end
 								end
 							end,
@@ -105,7 +105,9 @@ ChatSoundCustomizer.options = {
 										end
 									end
 								end
-								return selectedSound
+								for i, v in ipairs(info.option.values) do
+									if selectedSound == v then return i end
+								end
 							end,
 						},
 						soundSend = {
@@ -113,12 +115,12 @@ ChatSoundCustomizer.options = {
 							name = L["Sound for sending messages"],
 							order = 3,
 							width = "full",
-							dialogControl = "LSM30_Sound",
-							values = AceGUIWidgetLSMlists.sound,
+							dialogControl = "Eliote-LSMSound",
+							values = LibStub("LibSharedMedia-3.0"):List("sound"),
 							set = function(info, val)
 								for k, enabled in pairs(multiSelectedValues) do
 									if enabled then
-										ChatSoundCustomizer.db.profile.soundsOut[k] = val
+										ChatSoundCustomizer.db.profile.soundsOut[k] = info.option.values[val]
 									end
 								end
 							end,
@@ -133,7 +135,9 @@ ChatSoundCustomizer.options = {
 										end
 									end
 								end
-								return selectedSound
+								for i, v in ipairs(info.option.values) do
+									if selectedSound == v then return i end
+								end
 							end,
 						}
 					}
@@ -148,26 +152,16 @@ for k, _ in pairs(ChatSoundCustomizer.eventsSoundTable) do
 		type = "group",
 		name = function() return module:GetChatNameColored(k) end,
 		args = {
-			soundReceive = {
-				type = "select",
-				name = L["Sound for receiving messages"],
-				width = "full",
-				dialogControl = "LSM30_Sound",
-				values = AceGUIWidgetLSMlists.sound,
-				set = function(info, val) ChatSoundCustomizer.db.profile.sounds[k] = val end,
-				get = function(info) return ChatSoundCustomizer.db.profile.sounds[k] end,
-				order = 1,
-			},
-			soundSend = {
-				type = "select",
-				name = L["Sound for sending messages"],
-				width = "full",
-				dialogControl = "LSM30_Sound",
-				values = AceGUIWidgetLSMlists.sound,
-				set = function(info, val) ChatSoundCustomizer.db.profile.soundsOut[k] = val end,
-				get = function(info) return ChatSoundCustomizer.db.profile.soundsOut[k] or "None" end,
-				order = 2,
-			}
+			soundReceive = ChatSoundCustomizer:CreateSoundAceOption(
+					L["Sound for receiving messages"],
+					1,
+					{ ChatSoundCustomizer, "db", "profile", "sounds", k }
+			),
+			soundSend = ChatSoundCustomizer:CreateSoundAceOption(
+					L["Sound for sending messages"],
+					2,
+					{ ChatSoundCustomizer, "db", "profile", "soundsOut", k }
+			),
 		}
 	}
 end

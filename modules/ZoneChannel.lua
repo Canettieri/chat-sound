@@ -45,26 +45,16 @@ end
 
 local function createConfigArgs(db)
 	return {
-		soundReceive = {
-			type = "select",
-			name = L["Sound for receiving messages"],
-			width = "full",
-			order = 1,
-			dialogControl = "LSM30_Sound",
-			values = AceGUIWidgetLSMlists.sound,
-			set = function(info, val) module.db.profile[db].input = val end,
-			get = function(info) return module.db.profile[db].input end,
-		},
-		soundSend = {
-			type = "select",
-			name = L["Sound for sending messages"],
-			width = "full",
-			order = 2,
-			dialogControl = "LSM30_Sound",
-			values = AceGUIWidgetLSMlists.sound,
-			set = function(info, val) module.db.profile[db].output = val end,
-			get = function(info) return module.db.profile[db].output end,
-		},
+		soundReceive = ChatSoundCustomizer:CreateSoundAceOption(
+				L["Sound for receiving messages"],
+				1,
+				{ module, "db", "profile", db, "input" }
+		),
+		soundSend = ChatSoundCustomizer:CreateSoundAceOption(
+				L["Sound for sending messages"],
+				2,
+				{ module, "db", "profile", db, "output" }
+		),
 	}
 end
 

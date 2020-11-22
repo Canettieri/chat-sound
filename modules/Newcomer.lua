@@ -40,44 +40,36 @@ ChatSoundCustomizer.options.args.chat.args.newcomer = {
 			name = L["Newcomer"],
 			inline = true,
 			args = {
-				sound = {
-					type = "select",
-					name = L["Select a sound"],
-					width = "full",
-					order = 1,
-					dialogControl = "LSM30_Sound",
-					values = AceGUIWidgetLSMlists.sound,
-					set = function(info, val) module.db.profile.newcomerSound = val end,
-					get = function(info) return module.db.profile.newcomerSound end,
-				},
+				sound = ChatSoundCustomizer:CreateSoundAceOption(
+						L["Select a sound"],
+						1,
+						{ module, "db", "profile", "newcomerSound" }
+				),
 				description = {
 					type = "description",
 					name = L["This sound will play when you are a GUIDE and a NEWCOMER says something in the Newcomer Chat"],
 					order = 2
 				}
-			}
+			},
+			order = 1
 		},
 		guide = {
 			type = "group",
 			name = L["Guide"],
 			inline = true,
 			args = {
-				sound = {
-					type = "select",
-					name = L["Select a sound"],
-					width = "full",
-					order = 1,
-					dialogControl = "LSM30_Sound",
-					values = AceGUIWidgetLSMlists.sound,
-					set = function(info, val) module.db.profile.guideSound = val end,
-					get = function(info) return module.db.profile.guideSound end,
-				},
+				sound = ChatSoundCustomizer:CreateSoundAceOption(
+						L["Select a sound"],
+						1,
+						{ module, "db", "profile", "guideSound" }
+				),
 				description = {
 					type = "description",
 					name = L["This sound will play when you are a NEWCOMER and a GUIDE says something in the Newcomer Chat"],
 					order = 2
 				}
-			}
+			},
+			order = 2
 		},
 	}
 }
