@@ -1,3 +1,6 @@
+-- prevent loading this module on classic
+if not C_PlayerMentorship or not IsActivePlayerMentor then return end
+
 local ADDON_NAME, L = ...
 
 local module = ChatSoundCustomizer:NewModule("NewcomerModule", "AceEvent-3.0")
