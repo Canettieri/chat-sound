@@ -32,8 +32,9 @@ function module:SetMute(mute)
 	LDB.icon = icons[mute]
 end
 
-local ICON_MOUSE_LEFT = "|A:newplayertutorial-icon-mouse-leftbutton:0:0|a "
-local ICON_MOUSE_RIGHT = "|A:newplayertutorial-icon-mouse-rightbutton:0:0|a "
+local IS_MAINLINE = WOW_PROJECT_MAINLINE == WOW_PROJECT_ID
+local ICON_MOUSE_LEFT = IS_MAINLINE and "|A:newplayertutorial-icon-mouse-leftbutton:0:0|a " or ""
+local ICON_MOUSE_RIGHT = IS_MAINLINE and "|A:newplayertutorial-icon-mouse-rightbutton:0:0|a " or ""
 function LDB.OnTooltipShow(ttp)
 	ttp:AddLine("|cFFFFFFFF" .. ChatSoundCustomizer.title)
 	ttp:AddLine(" ")
