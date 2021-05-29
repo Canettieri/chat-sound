@@ -5,14 +5,14 @@ local module = ChatSoundCustomizer:NewModule("LDBModule", "AceEvent-3.0")
 module.priority = -1
 
 local icons = {
-	[false] = "237377",
+	[false] = [[Interface\AddOns\Chat_Sound_Customizer\Icons\Inv_misc_horn_04]], -- "237377"
 	[true] = "135975"
 }
 local isTemporarilyMuted = false
 
 local LDB = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(ADDON_NAME, {
 	type = "launcher",
-	icon = "237377",
+	icon = icons[false],
 	label = ChatSoundCustomizer.title,
 })
 local LDBIcon = LibStub("LibDBIcon-1.0")
