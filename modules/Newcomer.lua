@@ -14,9 +14,9 @@ function module:OnInitialize()
 	ChatSoundCustomizer:RegisterEvent("CHAT_MSG_CHANNEL", "PlaySound")
 end
 
-local function play(sound)
+local function play(flag, sound)
 	if sound and sound ~= "None" then
-		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		ChatSoundCustomizer:PlaySoundThrottle(flag, sound)
 		return true
 	end
 end
@@ -24,9 +24,9 @@ end
 function module:PlaySound(event, ...)
 	local flag = select(6, ...)
 	if (flag == "NEWCOMER" and IsActivePlayerMentor()) then
-		return play(self.db.profile.newcomerSound)
+		return play(flag, self.db.profile.newcomerSound)
 	elseif (flag == "GUIDE" and C_PlayerMentorship.IsActivePlayerConsideredNewcomer()) then
-		return play(self.db.profile.guideSound)
+		return play(flag, self.db.profile.guideSound)
 	end
 end
 

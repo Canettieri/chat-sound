@@ -50,6 +50,8 @@ L["Trade"] = true
 L["Local Defense"] = true
 L["Sound for receiving messages"] = true
 L["Sound for sending messages"] = true
+L["Notification interval (ms)"] = true
+L["This is the minimum interval in milliseconds for a sound to be played again. Each chat is individual."] = true
 
 if GetLocale() == "enUS" or GetLocale() == "enGB" then
 	return
@@ -102,6 +104,9 @@ if GetLocale() == "ptBR" then
 	L["Local Defense"] = "Defesa Local"
 	L["Sound for receiving messages"] = "Som para mensagens recebidas"
 	L["Sound for sending messages"] = "Som para mensagens enviadas"
+	L["Notification interval (ms)"] = "Intervalo de notificação (ms)"
+	L["This is the minimum interval in milliseconds for a sound to be played again. Each chat is individual."]
+	= "O intervalo mínimo em milissegundos para que um som toque novamente. Cada chat é individual."
 	--@end-debug@
 
 	return

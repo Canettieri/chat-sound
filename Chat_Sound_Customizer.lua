@@ -35,7 +35,12 @@ ChatSoundCustomizer.eventsSoundTable = {
 }
 
 function ChatSoundCustomizer:OnInitialize()
-	local defaults = { profile = { sounds = self.eventsSoundTable, channel = "Master", soundsOut = {} } }
+	local defaults = { profile = {
+		sounds = self.eventsSoundTable,
+		channel = "Master",
+		soundsOut = {},
+		throttling = 1000
+	}}
 	self.db = LibStub("AceDB-3.0"):New("ChatSoundCustomizerDB", defaults, "Default")
 	self.options.args.profile = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	self.options.args.profile.order = -1
@@ -106,7 +111,7 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 	end
 
 	if sound and sound ~= "None" then
-		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		self:PlaySoundThrottle(event, sound)
 		return
 	end
 
@@ -151,4 +156,14 @@ function ChatSoundCustomizer:CreateSoundAceOption(name, order, dbPath)
 		order = order,
 		dialogControl = "Eliote-LSMSound"
 	}
+end
+
+local throttle = {}
+function ChatSoundCustomizer:PlaySoundThrottle(tag, sound)
+	local time = GetTime()
+	local minDelay = ChatSoundCustomizer.db.profile.throttling / 1000.0
+	if not throttle[tag] or (throttle[tag] + minDelay) <= time then
+		throttle[tag] = time
+		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+	end
 end

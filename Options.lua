@@ -62,6 +62,17 @@ ChatSoundCustomizer.options = {
 					get = function(info) return ChatSoundCustomizer.db.profile.channel end,
 					set = function(info, val) ChatSoundCustomizer.db.profile.channel = val end
 				},
+				throttling = {
+					type = "range",
+					name = L["Notification interval (ms)"],
+					desc = L["This is the minimum interval in milliseconds for a sound to be played again. Each chat is individual."],
+					min = 0,
+					max = 6000000,
+					softMax = 10000,
+					bigStep = 250,
+					get = function(info) return ChatSoundCustomizer.db.profile.throttling end,
+					set = function(info, val) ChatSoundCustomizer.db.profile.throttling = val end
+				},
 				multi = {
 					type = "group",
 					inline = true,

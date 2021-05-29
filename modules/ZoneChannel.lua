@@ -38,7 +38,7 @@ function module:PlaySound(event, ...)
 	end
 
 	if sound and sound ~= "None" then
-		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		ChatSoundCustomizer:PlaySoundThrottle(event, sound)
 		return true
 	end
 end
