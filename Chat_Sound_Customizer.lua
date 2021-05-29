@@ -26,6 +26,12 @@ ChatSoundCustomizer.eventsSoundTable = {
 	["CHAT_MSG_RAID_LEADER"] = "CSC Sound 5",
 	["CHAT_MSG_INSTANCE_CHAT"] = "CSC Sound 5",
 	["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "CSC Sound 5",
+
+	-- Say
+	["CHAT_MSG_SAY"] = "None",
+
+	-- Yell
+	["CHAT_MSG_YELL"] = "None",
 }
 
 function ChatSoundCustomizer:OnInitialize()

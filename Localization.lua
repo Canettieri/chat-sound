@@ -19,6 +19,8 @@ L["CHAT_MSG_RAID"] = "Raid"
 L["CHAT_MSG_RAID_LEADER"] = "Raid Leader"
 L["CHAT_MSG_INSTANCE_CHAT"] = "Instance"
 L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Instance Leader"
+L["CHAT_MSG_SAY"] = "Say"
+L["CHAT_MSG_YELL"] = "Yell"
 
 L["Config UI"] = true
 L["Open config UI"] = true
@@ -67,6 +69,8 @@ if GetLocale() == "ptBR" then
 	L["CHAT_MSG_RAID_LEADER"] = "Líder da Raid"
 	L["CHAT_MSG_INSTANCE_CHAT"] = "Instância"
 	L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Líder da Instância"
+	L["CHAT_MSG_SAY"] = "Dizer"
+	L["CHAT_MSG_YELL"] = "Gritar"
 
 	L["Config UI"] = "Interface de Configuração"
 	L["Open config UI"] = "Abrir configuração"
