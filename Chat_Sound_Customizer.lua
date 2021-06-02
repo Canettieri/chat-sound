@@ -32,6 +32,9 @@ ChatSoundCustomizer.eventsSoundTable = {
 
 	-- Yell
 	["CHAT_MSG_YELL"] = "None",
+
+	-- Emotes
+	["CHAT_MSG_EMOTE"] = "None",
 }
 
 function ChatSoundCustomizer:OnInitialize()

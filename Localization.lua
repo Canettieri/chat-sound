@@ -21,6 +21,7 @@ L["CHAT_MSG_INSTANCE_CHAT"] = "Instance"
 L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Instance Leader"
 L["CHAT_MSG_SAY"] = "Say"
 L["CHAT_MSG_YELL"] = "Yell"
+L["CHAT_MSG_EMOTE"] = "Emote"
 
 L["Config UI"] = true
 L["Open config UI"] = true
@@ -73,6 +74,7 @@ if GetLocale() == "ptBR" then
 	L["CHAT_MSG_INSTANCE_CHAT_LEADER"] = "Líder da Instância"
 	L["CHAT_MSG_SAY"] = "Dizer"
 	L["CHAT_MSG_YELL"] = "Gritar"
+	L["CHAT_MSG_EMOTE"] = "Expressão"
 
 	L["Config UI"] = "Interface de Configuração"
 	L["Open config UI"] = "Abrir configuração"
