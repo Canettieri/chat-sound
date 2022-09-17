@@ -106,6 +106,12 @@ end
 function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 	if self:ShouldIgnoreEvent(event, text, playerName, ...) then return end
 
+	for _, module in self:IterateModulesByPriority() do
+		if module.PlaySound and module:PlaySound(event, text, playerName, ...) then
+			return
+		end
+	end
+
 	local sound
 	if self:IsOutput(text, playerName) then
 		sound = self.db.profile.soundsOut[event]
@@ -118,14 +124,9 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 		return
 	end
 
-	for _, module in self:IterateModulesByPriority() do
-		if module.PlaySound and module:PlaySound(event, text, playerName, ...) then
-			return
-		end
-	end
 end
 
-function ChatSoundCustomizer:IsOutput(_, playerName)
+function ChatSoundCustomizer:IsOutput(playerName)
 	return playerName == fullName
 end
 

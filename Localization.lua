@@ -109,6 +109,14 @@ if GetLocale() == "ptBR" then
 	L["Notification interval (ms)"] = "Intervalo de notificação (ms)"
 	L["This is the minimum interval in milliseconds for a sound to be played again. Each chat is individual."]
 	= "O intervalo mínimo em milissegundos para que um som toque novamente. Cada chat é individual."
+
+	L["Customized"] = "Personalizado"
+	L["Add player"] = "Adicionar jogador"
+	L["Remove player"] = "Remover jogador"
+	L["Create group"] = "Criar grupo"
+	L["Remove group"] = "Remover grupo"
+	L["Group"] = "Grupo"
+
 	--@end-debug@
 
 	return

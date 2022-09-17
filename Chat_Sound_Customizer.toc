@@ -22,4 +22,5 @@ LDB.lua
 
 modules\IgnoreList.lua
 modules\Newcomer.lua
+modules\PlayerList.lua
 modules\ZoneChannel.lua

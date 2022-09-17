@@ -31,7 +31,7 @@ function module:PlaySound(event, ...)
 	if not dbVar then return end
 
 	local sound
-	if (ChatSoundCustomizer:IsOutput(...)) then
+	if (ChatSoundCustomizer:IsOutput(select(2))) then
 		sound = self.db.profile[dbVar] and self.db.profile[dbVar].output
 	else
 		sound = self.db.profile[dbVar] and self.db.profile[dbVar].input
