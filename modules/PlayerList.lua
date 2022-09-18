@@ -4,7 +4,7 @@ local module = ChatSoundCustomizer:NewModule("PlayerListModule", "AceEvent-3.0")
 module.priority = 5
 
 local Completing = LibStub("AceGUI-3.0-Eliote-AutoCompleteEditBox")
-Completing:Register("CSCOnlinePlayersAutoComplete", AUTOCOMPLETE_LIST_TEMPLATES.ONLINE)
+Completing:Register("CSCOnlinePlayersAutoComplete", AUTOCOMPLETE_LIST_TEMPLATES.ALL_CHARS)
 
 function module:OnInitialize()
 	local defaults = { profile = { players = {}, groups = {} } }
