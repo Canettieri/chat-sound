@@ -113,7 +113,7 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 	end
 
 	local sound
-	if self:IsOutput(text, playerName) then
+	if self:IsOutput(playerName) then
 		sound = self.db.profile.soundsOut[event]
 	else
 		sound = self.db.profile.sounds[event]
