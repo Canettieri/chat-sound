@@ -1,6 +1,7 @@
 local ADDON_NAME, L = ...
 
 local fullName
+local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
 
 ChatSoundCustomizer = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
 ChatSoundCustomizer.title = GetAddOnMetadata(ADDON_NAME, "Title")
