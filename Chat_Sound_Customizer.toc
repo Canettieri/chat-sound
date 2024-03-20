@@ -1,5 +1,5 @@
-## Interface: 100205
-## Interface-Classic: 11404
+## Interface: 100206
+## Interface-Classic: 11501
 ## Interface-Wrath: 30403
 ## Title: Chat Sound Customizer
 ## Notes: Don't miss chat messages anymore by not listening to them.
