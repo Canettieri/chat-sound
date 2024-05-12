@@ -1,4 +1,4 @@
-## Interface: 100206
+## Interface: 100207
 ## Interface-Classic: 11501
 ## Interface-Cata: 40400
 ## Title: Chat Sound Customizer
