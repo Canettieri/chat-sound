@@ -1,6 +1,6 @@
-## Interface: 110002
-## Interface-Classic: 11504
-## Interface-Cata: 40400
+## Interface: 110005
+## Interface-Classic: 11505
+## Interface-Cata: 40401
 ## Title: Chat Sound Customizer
 ## Notes: Don't miss chat messages anymore by not listening to them.
 ## Notes-ptBR: Não perca mais as mensagens no chat por não ouvi-las.
