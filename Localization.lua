@@ -117,6 +117,10 @@ if GetLocale() == "ptBR" then
 	L["Remove group"] = "Remover grupo"
 	L["Group"] = "Grupo"
 
+	L["Custom Channel"] = "Canal Personalizado"
+	L["Add channel"] = "Adicionar canal"
+	L["Remove channel"] = "Remover canal"
+
 	--@end-debug@
 
 	return
