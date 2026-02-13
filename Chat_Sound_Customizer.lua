@@ -2,6 +2,7 @@ local ADDON_NAME, L = ...
 
 local fullName
 local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+local issecretvalue = issecretvalue or nop
 
 ChatSoundCustomizer = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
 ChatSoundCustomizer.title = GetAddOnMetadata(ADDON_NAME, "Title")
@@ -128,6 +129,8 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 end
 
 function ChatSoundCustomizer:IsOutput(playerName)
+  -- Assume that the secret player is not yourself
+  if (issecretvalue(playerName)) then return false end
 	return playerName == fullName
 end
 
