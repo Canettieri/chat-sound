@@ -1,5 +1,9 @@
 package-as: Chat_Sound_Customizer
 
+ignore:
+    - tests
+    - release-notes.md
+
 manual-changelog:
-    filename: CHANGELOG.txt
+    filename: CHANGELOG.md
     markup-type: markdown

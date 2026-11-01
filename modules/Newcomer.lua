@@ -22,7 +22,9 @@ local function play(flag, sound)
 end
 
 function module:PlaySound(event, ...)
+	if event ~= "CHAT_MSG_CHANNEL" then return end
 	local flag = select(6, ...)
+	if issecretvalue and issecretvalue(flag) then return end
 	if (flag == "NEWCOMER" and IsActivePlayerMentor()) then
 		return play(flag, self.db.profile.newcomerSound)
 	elseif (flag == "GUIDE" and C_PlayerMentorship.IsActivePlayerConsideredNewcomer()) then
@@ -35,7 +37,8 @@ ChatSoundCustomizer.options.args.chat.args.newcomer = {
 	type = "group",
 	name = function()
 		local color = config:GetColorForEvent("CHAT_MSG_CHANNEL")
-		return NPEV2_CHAT_USER_TAG_NEWCOMER .. " " .. color:WrapTextInColorCode(L["Newcomer"]) .. " / " .. NPEV2_CHAT_USER_TAG_GUIDE
+		local name = color and color:WrapTextInColorCode(L["Newcomer"]) or L["Newcomer"]
+		return NPEV2_CHAT_USER_TAG_NEWCOMER .. " " .. name .. " / " .. NPEV2_CHAT_USER_TAG_GUIDE
 	end,
 	args = {
 		newcomer = {

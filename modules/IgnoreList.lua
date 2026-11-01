@@ -6,7 +6,7 @@ module.priority = 3
 local Completing = LibStub("AceGUI-3.0-Eliote-AutoCompleteEditBox")
 Completing:Register("CSCOnlinePlayersAutoComplete", AUTOCOMPLETE_LIST_TEMPLATES.ALL_CHARS)
 
-local issecretvalue = issecretvalue or nop
+local issecretvalue = issecretvalue or function() return false end
 
 function module:OnInitialize()
 	local defaults = { profile = { ignoredNames = {}, ignoredWords = {} } }
@@ -17,14 +17,16 @@ function module:ShouldIgnoreEvent(event, text, playerName)
 	-- we can't do anything if the text is secret or nil
 	if ((not issecretvalue(text)) and text) then
 		for word, _ in pairs(module.db.profile.ignoredWords) do
-			if (string.find(" " .. text .. " ", "%A" .. word .. "%A")) then
+			-- Escape user input while preserving the existing whole-word boundaries.
+			local literalWord = word:gsub("(%W)", "%%%1")
+			if (string.find(" " .. text .. " ", "%A" .. literalWord .. "%A")) then
 				return true
 			end
 		end
 	end
 
 	-- we can't do anything if the playerName is secret
-	if (issecretvalue(playerName)) then return false end
+	if issecretvalue(playerName) or type(playerName) ~= "string" then return false end
 
 	return module.db.profile.ignoredNames[playerName]
 			or module.db.profile.ignoredNames[(string.match(playerName, "(.*)-.*"))]

@@ -2,7 +2,7 @@ local ADDON_NAME, L = ...
 
 local fullName
 local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
-local issecretvalue = issecretvalue or nop
+local issecretvalue = issecretvalue or function() return false end
 
 ChatSoundCustomizer = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME, "AceEvent-3.0")
 ChatSoundCustomizer.title = GetAddOnMetadata(ADDON_NAME, "Title")
@@ -129,8 +129,14 @@ function ChatSoundCustomizer:PlaySound(event, text, playerName, ...)
 end
 
 function ChatSoundCustomizer:IsOutput(playerName)
-  -- Assume that the secret player is not yourself
-  if (issecretvalue(playerName)) then return false end
+	-- Assume that the secret player is not yourself.
+	if issecretvalue(playerName) or type(playerName) ~= "string" then return false end
+	if NameUtil and NameUtil.IsPlayerMe then
+		local separator = Constants and Constants.CharacterNameSeparatorConsts
+			and Constants.CharacterNameSeparatorConsts.CHARACTERNAME_SURNAME_SEPARATOR or " "
+		local name, surname = strsplit(separator, playerName)
+		return NameUtil.IsPlayerMe(name, surname)
+	end
 	return playerName == fullName
 end
 
@@ -168,10 +174,21 @@ end
 
 local throttle = {}
 function ChatSoundCustomizer:PlaySoundThrottle(tag, sound)
+	if type(sound) ~= "string" or sound == "None" then return false end
+	local soundFile = LibStub("LibSharedMedia-3.0"):HashTable("sound")[sound]
+	if not ((type(soundFile) == "string" and soundFile ~= "")
+		or (type(soundFile) == "number" and soundFile > 0)) then
+		return false
+	end
+
 	local time = GetTime()
 	local minDelay = ChatSoundCustomizer.db.profile.throttling / 1000.0
 	if not throttle[tag] or (throttle[tag] + minDelay) <= time then
-		throttle[tag] = time
-		PlaySoundFile(AceGUIWidgetLSMlists.sound[sound], ChatSoundCustomizer.db.profile.channel or "Master")
+		local willPlay = PlaySoundFile(soundFile, ChatSoundCustomizer.db.profile.channel or "Master")
+		if willPlay then
+			throttle[tag] = time
+			return true
+		end
 	end
+	return false
 end

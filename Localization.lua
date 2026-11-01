@@ -30,6 +30,9 @@ L["Chats"] = true
 L["Channel"] = true
 L["Multi Selection"] = true
 L["Select a sound"] = true
+L["Sound packs"] = true
+L["Reload UI"] = true
+L["Enable the extra sound packs you want to use. Changes take effect after reloading the UI. Disabling a pack keeps your sound selections saved, but its sounds will be unavailable until enabled again."] = true
 L["Ignore List"] = true
 L["Add to ignore list"] = true
 L["Remove from ignore list"] = true
@@ -59,6 +62,9 @@ if GetLocale() == "enUS" or GetLocale() == "enGB" then
 end
 
 if GetLocale() == "ptBR" then
+	L["Sound packs"] = "Pacotes de sons"
+	L["Reload UI"] = "Recarregar interface"
+	L["Enable the extra sound packs you want to use. Changes take effect after reloading the UI. Disabling a pack keeps your sound selections saved, but its sounds will be unavailable until enabled again."] = "Ative os pacotes extras que deseja usar. As alterações são aplicadas após recarregar a interface. Desativar um pacote mantém suas seleções salvas, mas seus sons ficam indisponíveis até ativá-lo novamente."
 	--@localization(locale="ptBR", format="lua_additive_table")@
 	--@debug@
 	L["CHAT_MSG_OFFICER"] = "Oficial da Guilda"

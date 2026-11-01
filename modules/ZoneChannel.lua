@@ -26,7 +26,9 @@ function module:OnInitialize()
 end
 
 function module:PlaySound(event, ...)
+	if event ~= "CHAT_MSG_CHANNEL" then return end
 	local zoneChannelID = select(7, ...)
+	if (issecretvalue and issecretvalue(zoneChannelID)) or type(zoneChannelID) ~= "number" then return end
 	local dbVar = zoneIdDbMap[zoneChannelID]
 	if not dbVar then return end
 
@@ -38,7 +40,7 @@ function module:PlaySound(event, ...)
 	end
 
 	if sound and sound ~= "None" then
-		ChatSoundCustomizer:PlaySoundThrottle(event, sound)
+		ChatSoundCustomizer:PlaySoundThrottle(event .. ":zone:" .. zoneChannelID, sound)
 		return true
 	end
 end
@@ -62,7 +64,7 @@ ChatSoundCustomizer.options.args.chat.args.zonechannel = {
 	type = "group",
 	name = function()
 		local color = config:GetColorForEvent("CHAT_MSG_CHANNEL")
-		return color:WrapTextInColorCode(L["Zone Channels"])
+		return color and color:WrapTextInColorCode(L["Zone Channels"]) or L["Zone Channels"]
 	end,
 	args = {
 		general = {

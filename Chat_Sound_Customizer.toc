@@ -1,4 +1,4 @@
-## Interface: 120007, 50504, 11509
+## Interface: 120105, 50504, 11509, 16001
 ## Title: Chat Sound Customizer
 ## Notes: Don't miss chat messages anymore by not listening to them.
 ## Notes-ptBR: Não perca mais as mensagens no chat por não ouvi-las.
@@ -15,6 +15,11 @@ Localization.lua
 Chat_Sound_Customizer.lua
 Options.lua
 SoundsRegistry.lua
+SoundPacks.lua
+sound-packs\CSC_EffectPack01\Sounds.lua
+sound-packs\CSC_NotificationPack01\Sounds.lua
+sound-packs\CSC_NotificationPack02\Sounds.lua
+sound-packs\CSC_StarCraftPack\Sounds.lua
 LDB.lua
 
 modules\IgnoreList.lua

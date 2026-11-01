@@ -6,7 +6,7 @@ module.priority = 5
 local Completing = LibStub("AceGUI-3.0-Eliote-AutoCompleteEditBox")
 Completing:Register("CSCOnlinePlayersAutoComplete", AUTOCOMPLETE_LIST_TEMPLATES.ALL_CHARS)
 
-local issecretvalue = issecretvalue or nop
+local issecretvalue = issecretvalue or function() return false end
 function module:OnInitialize()
 	local defaults = { profile = { players = {}, groups = {} } }
 	self.db = ChatSoundCustomizer.db:RegisterNamespace("PlayerList", defaults)
@@ -26,7 +26,7 @@ end
 
 function module:PlaySound(event, _, playerName)
 	-- we can't do anything if the playerName is secret
-	if (issecretvalue(playerName)) then return end
+	if issecretvalue(playerName) or type(playerName) ~= "string" then return end
 
 	local players = self.db.profile.players
 	local playerConfig = players[playerName] or players[(string.match(playerName, "(.*)-.*"))]

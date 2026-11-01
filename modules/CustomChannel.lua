@@ -21,7 +21,9 @@ local function play(flag, sound)
 end
 
 function module:PlaySound(event, ...)
+	if event ~= "CHAT_MSG_CHANNEL" then return end
 	local baseName = select(9, ...)
+	if (issecretvalue and issecretvalue(baseName)) or type(baseName) ~= "string" then return end
 	local channelConfig = module.db.profile.channels[baseName]
 	if not channelConfig then return end
 
@@ -33,7 +35,7 @@ function module:PlaySound(event, ...)
 	end
 
 	if sound and sound ~= "None" then
-		ChatSoundCustomizer:PlaySoundThrottle(event, sound)
+		ChatSoundCustomizer:PlaySoundThrottle(event .. ":custom:" .. baseName, sound)
 		return true
 	end
 end

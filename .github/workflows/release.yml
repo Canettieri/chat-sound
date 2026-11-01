@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Clone project
         uses: actions/checkout@v3
@@ -19,6 +21,17 @@ jobs:
         with:
           args: --no-color -o 011
 
+      - name: Prepare release notes
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v version="$version" '
+            index($0, "## [" version "]") == 1 { include = 1 }
+            include && /^## \[/ && index($0, "## [" version "]") != 1 { exit }
+            include { print }
+          ' CHANGELOG.md > release-notes.md
+          test -s release-notes.md
+
       - name: Packager
         uses: BigWigsMods/packager@v2
         # automatically generates game type specific TOC files
@@ -28,3 +41,8 @@ jobs:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
           WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+
+      - name: Publish release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "$GITHUB_REF_NAME" --notes-file release-notes.md
