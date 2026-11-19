@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2026-11-19
+
+### Added
+
+- The WoW AddOns list now shows the same horn icon as the minimap button.
+
+### Changed
+
+- Chat Sound Customizer now appears in the Chat category of the WoW AddOns list (Bate-papo in Brazilian Portuguese).
+
+### Fixed
+
+- The addon options menu now shows `Chat Sound Customizer` without underscores.
+
 ## [3.0.0] - 2026-11-01
 
 In-game validation of audio playback and the recent Retail and Forever compatibility changes is still pending.
@@ -52,6 +66,7 @@ In-game validation of audio playback and the recent Retail and Forever compatibi
 
 - Skipped restricted message text and sender names in rules that need to inspect those values.
 
+[3.1.0]: https://github.com/Canettieri/chat-sound/releases/tag/v3.1.0
 [3.0.0]: https://github.com/Canettieri/chat-sound/releases/tag/v3.0.0
 [2.7.1]: https://github.com/Canettieri/chat-sound/releases/tag/v2.7.1
 [2.7]: https://github.com/Canettieri/chat-sound/releases/tag/v2.7

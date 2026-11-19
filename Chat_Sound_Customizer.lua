@@ -58,7 +58,7 @@ function ChatSoundCustomizer:OnInitialize()
 	AceConfig:RegisterOptionsTable(ADDON_NAME, self.options, { "csc", "chatsound" })
 
 	local AceDialog = LibStub("AceConfigDialog-3.0")
-	self.optionsFrame = AceDialog:AddToBlizOptions(ADDON_NAME)
+	self.optionsFrame = AceDialog:AddToBlizOptions(ADDON_NAME, self.title)
 end
 
 function ChatSoundCustomizer:OnEnable()

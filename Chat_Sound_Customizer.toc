@@ -1,5 +1,8 @@
 ## Interface: 120105, 50504, 11509, 16001
 ## Title: Chat Sound Customizer
+## IconTexture: Interface\AddOns\Chat_Sound_Customizer\icons\Inv_misc_horn_04.tga
+## Category: Chat
+## Category-ptBR: Bate-papo
 ## Notes: Don't miss chat messages anymore by not listening to them.
 ## Notes-ptBR: Não perca mais as mensagens no chat por não ouvi-las.
 ## Author: Canettieri & Eliote
